@@ -14,11 +14,11 @@ function Message(props) {
 }
 
 root.render(<Message>Loading . . .</Message>);
-fetch("https://joylrnxhyj.execute-api.us-east-1.amazonaws.com/gamedata")
+
+fetch("gamedata")
 .then(resp => resp.json())
 .then(data => {
     console.log("got game data for " + data.today.displayDate);
-
     const game = { data };
     game.special = data.today.centerLetter;
     game.words = data.today.answers.sort((a,b) =>
@@ -111,13 +111,3 @@ class App extends React.Component {
         );
     }
 }
-
-//// TESTING ////
-
-// const game = { data: {"today":{"expiration":1656918000,"displayWeekday":"Sunday","displayDate":"July 3, 2022","printDate":"2022-07-03","centerLetter":"b","outerLetters":["a","n","o","t","u","y"],"validLetters":["b","a","n","o","t","u","y"],"pangrams":["buoyant"],"answers":["buoyant","abbot","about","abut","attaboy","baba","baboon","baby","banana","banyan","baobab","batboy","baton","batty","bayou","boat","boba","bonbon","bonny","bonobo","bony","boob","booboo","booby","boon","boot","booty","botany","bounty","bout","bubba","bunny","bunt","buoy","butt","button","buyout","nabob","nanobot","noob","nubby","tabby","taboo","tuba","tubby","unban","unbutton"],"id":13081,"freeExpiration":0,"editor":"Sam Ezersky"},"yesterday":{"expiration":1656831600,"displayWeekday":"Saturday","displayDate":"July 2, 2022","printDate":"2022-07-02","centerLetter":"p","outerLetters":["a","c","i","l","o","t"],"validLetters":["p","a","c","i","l","o","t"],"pangrams":["apolitical","capitol","occipital","optical","political","topical"],"answers":["apolitical","capitol","occipital","optical","political","topical","alcopop","alpaca","appall","atop","capital","capo","catalpa","clap","clip","clop","coop","coopt","copilot","laptop","lipo","lollipop","lollop","loop","octopi","opal","optic","pact","pail","palapa","palatal","palatial","pall","palp","papa","papal","papilla","patio","pica","piccata","piccolo","picot","pill","pilot","pipit","pita","pitapat","plait","plat","plop","plot","polio","politic","politico","poll","polo","pool","poop","poppa","potato","tapa","tapioca","tilapia","tiptop","topcoat","topic"],"id":20028,"freeExpiration":0,"editor":"Sam Ezersky"}}};
-// game.special = game.data.today.centerLetter;
-// game.words = game.data.today.answers.sort((a,b) =>
-//     a.slice(0,2) == b.slice(0,2) ? a.length - b.length : a < b ? -1 : 1);
-// game.firsts = unique(game.words.map(w => w.slice(0,1)));
-// game.seconds = unique(game.words.map(w => w.slice(0,2)));
-// root.render(<App game={game} />);
