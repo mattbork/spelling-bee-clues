@@ -45,6 +45,7 @@ class App extends React.Component {
     }
 
     setLetters = e => this.setState({letters: e.target.value});
+
     setDone = e => this.setState(state => {
         let elm = e.target;
         while(elm && elm.tagName != 'LI') elm = elm.parentElement;
@@ -84,10 +85,11 @@ class App extends React.Component {
                 <div id='top-buttons'>
                     {game.firsts.map(l => {
                         let classes = 'top-button';
-                        if(l == letters[0]) classes += ' top-button-selected';
+                        const selected = (l == letters[0]);
+                        if(selected) classes += ' top-button-selected';
                         if(l == game.special) classes += ' top-button-special';
                         if(game.words.every(w => w[0] != l || done[w])) classes += ' top-button-done';
-                        return (<button key={l} value={l} onClick={this.setLetters} className={classes}>
+                        return (<button key={l} value={l} disabled={selected} onClick={this.setLetters} className={classes}>
                             {l}
                         </button>);
                     })}
@@ -95,9 +97,10 @@ class App extends React.Component {
                 <div id='mid-buttons'>
                     {game.seconds.filter(ls => ls[0] == letters[0]).map(ls => {
                         let classes = 'mid-button';
-                        if(ls == letters) classes += ' mid-button-selected';
+                        const selected = (ls == letters);
+                        if(selected) classes += ' mid-button-selected';
                         if(game.words.every(w => !w.startsWith(ls) || done[w])) classes += ' mid-button-done';
-                        return (<button key={ls} value={ls} onClick={this.setLetters} className={classes}>
+                        return (<button key={ls} value={ls} disabled={selected} onClick={this.setLetters} className={classes}>
                             {ls}
                         </button>);
                     })}
