@@ -3,7 +3,8 @@
     "author": "Matthew Borkowski",
     "private": true,
     "scripts": {
-        "start": "webpack-dev-server --mode development"
+        "start": "webpack-dev-server --mode development",
+        "webpack": "webpack --mode production"
     },
     "devDependencies": {
         "@babel/core": "^7.18.6",
